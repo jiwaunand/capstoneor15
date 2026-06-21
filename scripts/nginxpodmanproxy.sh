@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 rm /etc/nginx/sites-enabled/podmanproxy.conf
-rm /etc/nginx/sites-avaliable/podmanproxy.conf
+rm /etc/nginx/sites-available/podmanproxy.conf
 cp ./configs/nginx/podmanproxy.conf /etc/nginx/sites-available/podmanproxy.conf
 sudo ln -s /etc/nginx/sites-available/podmanproxy.conf /etc/nginx/sites-enabled/
 sudo nginx -t
