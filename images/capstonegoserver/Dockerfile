@@ -1,4 +1,5 @@
 FROM golang:1.21-alpine AS builder
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 WORKDIR /app
 RUN go mod init go-s
 COPY main.go .
