@@ -7,16 +7,17 @@ import (
 )
 
 func main() {
-	// Menentukan direktori tempat file HTML/statis berada
-	fileServer := http.FileServer(http.Dir("./public"))
+	http.HandleFunc("/status", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		w.Write([]byte(`{"status": "healthy"}`))
+	})
 
-	// Menangani semua request (routing ke root "/")
+	fileServer := http.FileServer(http.Dir("./public"))
 	http.Handle("/", fileServer)
 
 	port := "8080"
 	fmt.Printf("Server berjalan. Silakan buka http://localhost:%s\n", port)
-
-	// Menjalankan server pada port 8080
 	err := http.ListenAndServe(":"+port, nil)
 	if err != nil {
 		log.Fatal("Gagal menjalankan server: ", err)

@@ -8,5 +8,7 @@ FROM alpine:latest
 WORKDIR /app
 COPY --from=builder /app/server .
 COPY public/ ./public/
+RUN chown -R appuser:appgroup /app
+USER appuser
 EXPOSE 8080
-CMD [ "./server" ]
+ENTRYPOINT ["./server"]
